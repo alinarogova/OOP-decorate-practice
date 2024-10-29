@@ -56,7 +56,51 @@ class Pizza:
     def show_info(self):
         print(", ".join(self.__ingr__))
 
+def add_ingredient(ingredient):
+    def decorator(f):
+        def wrapper(pizza):
+            pizza.__ingr__.append(ingredient)
+            return f(pizza)
+        return wrapper
+    return decorator
+@add_ingredient('basil')
+@add_ingredient('mozzarella')
+def marherita(pizza):
+    return pizza.show_info()
 
+print("Margarita ingredients: ", end="")
+pizza1 = Pizza()
+marherita(pizza1)
+
+@add_ingredient('ham')
+@add_ingredient('pineapple')
+def hawaiian(pizza):
+    return pizza.show_info()
+print("Hawaiian ingredients: ", end="")
+pizza2 = Pizza()
+hawaiian(pizza2)
+
+@add_ingredient('blue cheese')
+@add_ingredient('parmesan')
+@add_ingredient('gorgonzola')
+@add_ingredient('mozzarella')
+def four_cheese(pizza):
+    return pizza.show_info()
+print("Four Cheese ingredients: ", end="")
+pizza3 = Pizza()
+four_cheese(pizza3)
+
+
+@add_ingredient('ham')
+@add_ingredient('mushrooms')
+@add_ingredient('artichokes')
+@add_ingredient('olives')
+def capricciosa(pizza):
+    return pizza.show_info()
+print("Capricciosa ingredients: ", end="")
+pizza4 = Pizza()
+capricciosa(pizza4)
+'''
 def add_ingredient(ingredient):
     def decorator(pizza_class):
         def wrapper(*args, **kwargs):
@@ -109,3 +153,4 @@ print("\nFour Cheese ingredients:")
 four_cheese.show_info()
 print("\nCapricciosa ingredients:")
 capricciosa.show_info()
+'''
